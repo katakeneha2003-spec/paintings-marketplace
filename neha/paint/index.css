@@ -1,0 +1,229 @@
+/* ============================================================
+   Design tokens — "gallery wall" theme
+   A deep museum-wall green, warm canvas-white cards, and a
+   brass accent (like a placard frame) for interactive elements.
+   ============================================================ */
+:root {
+  --wall: #232922;
+  --wall-soft: #2c332a;
+  --canvas: #f4efe4;
+  --canvas-dim: #eae3d3;
+  --ink: #1c1a14;
+  --ink-soft: #5a5646;
+  --brass: #b08d57;
+  --brass-dark: #8c6e3f;
+  --clay: #a64b3c;
+  --line: rgba(28, 26, 20, 0.12);
+  --line-on-wall: rgba(244, 239, 228, 0.18);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
+
+  --radius: 2px;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background: var(--wall);
+  color: var(--canvas);
+  border-bottom: 1px solid var(--line-on-wall);
+}
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.brand-mark { color: var(--brass); }
+.nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; }
+.nav-links a { opacity: 0.85; transition: opacity .15s; }
+.nav-links a:hover { opacity: 1; color: var(--brass); }
+.cart-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--brass); color: var(--wall); font-weight: 600;
+  border-radius: 50%; width: 20px; height: 20px; font-size: 11px; margin-left: 6px;
+}
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--wall-soft); border: 1px solid var(--line-on-wall);
+  padding: 8px 12px; border-radius: var(--radius);
+}
+.search-box input {
+  background: transparent; border: none; outline: none; color: var(--canvas);
+  font-family: var(--font-body); font-size: 14px; width: 180px;
+}
+.search-box input::placeholder { color: rgba(244,239,228,0.5); }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: var(--wall);
+  color: var(--canvas);
+  padding: 72px 24px 88px;
+}
+.hero-inner { max-width: 1160px; margin: 0 auto; }
+.hero-eyebrow {
+  font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.08;
+  font-weight: 600;
+  max-width: 720px;
+  margin: 0 0 20px;
+}
+.hero p {
+  max-width: 520px;
+  color: rgba(244,239,228,0.75);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- Section heading ---------- */
+.section-heading {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin: 56px 0 24px;
+}
+.section-heading h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+.section-heading span { color: var(--ink-soft); font-size: 14px; }
+
+/* ---------- Gallery grid & painting cards ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px 28px;
+  padding-bottom: 72px;
+}
+.painting-card {
+  background: transparent;
+}
+.painting-frame {
+  background: var(--canvas-dim);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.painting-card:hover .painting-frame {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 16px 32px rgba(0,0,0,0.14);
+}
+.painting-frame img { width: 100%; height: 100%; object-fit: cover; }
+.painting-frame.placeholder { color: var(--ink-soft); font-family: var(--font-display); font-size: 14px; }
+
+/* The "museum placard" label — the page's signature element */
+.placard {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.placard-title { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.placard-meta {
+  font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 0 0 8px;
+}
+.placard-price { font-size: 15px; font-weight: 600; color: var(--brass-dark); }
+.placard-stock { font-size: 12px; color: var(--clay); margin-left: 8px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 12px 22px; border-radius: var(--radius); border: 1px solid transparent;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.btn-primary { background: var(--brass); color: var(--wall); }
+.btn-primary:hover { background: var(--brass-dark); }
+.btn-outline { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-outline:hover { background: var(--ink); color: var(--canvas); }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Forms ---------- */
+.field { margin-bottom: 18px; }
+.field label {
+  display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--ink-soft); margin-bottom: 6px;
+}
+.field input, .field textarea, .field select {
+  width: 100%; padding: 11px 13px; border: 1px solid var(--line);
+  background: #fff; border-radius: var(--radius); font-family: var(--font-body); font-size: 14px;
+  outline: none;
+}
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--brass); }
+.form-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 32px; max-width: 480px; box-shadow: var(--shadow-card);
+}
+
+/* ---------- Product detail ---------- */
+.detail-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; padding: 48px 0 72px; }
+@media (max-width: 800px) { .detail-grid { grid-template-columns: 1fr; } }
+.detail-image { background: var(--canvas-dim); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+.detail-title { font-family: var(--font-display); font-size: 34px; margin: 0 0 8px; }
+.detail-price { font-size: 22px; color: var(--brass-dark); font-weight: 600; margin: 12px 0 20px; }
+.detail-meta-row { display: flex; gap: 24px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 20px; font-size: 13px; }
+.detail-meta-row div span { display: block; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); font-size: 11px; margin-bottom: 3px; }
+
+/* ---------- Cart ---------- */
+.cart-row { display: flex; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.cart-row img { width: 76px; height: 76px; object-fit: cover; border: 1px solid var(--line); }
+.cart-row-info { flex: 1; }
+.cart-summary { display: flex; justify-content: space-between; padding: 16px 0; font-size: 15px; }
+.cart-summary.total { font-weight: 700; font-size: 18px; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 16px; }
+.qty-input { width: 56px; padding: 6px 8px; border: 1px solid var(--line); border-radius: var(--radius); text-align: center; }
+
+/* ---------- Admin table ---------- */
+.admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-table th, .admin-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.admin-table th { text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; color: var(--ink-soft); }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; background: var(--canvas-dim); }
+
+/* ---------- Footer ---------- */
+.footer { background: var(--wall); color: rgba(244,239,228,0.6); padding: 40px 24px; margin-top: 64px; font-size: 13px; text-align: center; }
+
+.empty-state { text-align: center; padding: 80px 20px; color: var(--ink-soft); }
+.empty-state h3 { font-family: var(--font-display); font-size: 24px; color: var(--ink); margin-bottom: 8px; }
+
+.error-banner { background: #fbe9e6; border: 1px solid var(--clay); color: var(--clay); padding: 12px 16px; border-radius: var(--radius); font-size: 14px; margin-bottom: 18px; }
+.success-banner { background: #eaf3e8; border: 1px solid #4f7a4a; color: #3d5f3a; padding: 12px 16px; border-radius: var(--radius); font-size: 14px; margin-bottom: 18px; }
